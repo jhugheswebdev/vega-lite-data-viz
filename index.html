@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embedding Vega-Lite</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4.0.0-rc.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2.5.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.14.0"></script>
+</head>
+<body>
+
+  <div id="vis"></div>
+
+  <script type="text/javascript">
+    var yourVlSpec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v2.0.json",
+      "title": {"text": "Vega Lite Stuff",
+                "orient": "top"
+              },
+      "data": {"url": "https://vega.github.io/vega-lite/data/seattle-weather.csv"},
+      "vconcat": [
+      {
+          "width": 480,
+          "height": 300,
+          "mark": "bar",
+          "encoding": {
+            "color": {
+              "field": "weather", "type": "nominal",
+              "scale": "category"
+            },
+            "x": {
+              "timeUnit": "month", 
+              "field": "date", 
+              "type": "ordinal"
+            },
+            "y": {
+              "aggregate": "count",
+              "field": "*", 
+              "type": "quantitative"
+            },
+            "tooltip": {"aggregate": "count", "type": "quantitative"}
+
+          }
+        },
+        { 
+          "width": 480,
+          "mark": "point",
+          "encoding": {
+            "x": {
+              "field": "date", 
+              "type": "temporal",
+              "scale": {"domain": {"selection": "brush"}},
+              "axis": {"title": ""}
+            },
+            "y": {
+              "field": "wind", "type": "quantitative",
+              "axis": {"title": "wind"}
+            },
+            "tooltip": {"field": "wind", "type": "quantitative"}
+          }
+        },{
+          "width": 480,
+          "height": 60,
+          "mark": "point",
+          "selection" : {
+            "brush": {"type": "interval", "encodings": ["x"]}
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "axis": {"format": "%Y"}
+            },
+            "y": {
+              "field": "wind",
+              "type": "quantitative",
+              "axis": {"tickCount": 3, "grid": false}
+            }
+          }
+        },
+        
+        {
+          "width": 480,
+          "mark": "bar",
+          "encoding": {
+            "x": {
+              "timeUnit": "yearquartermonth", 
+              "field": "date", 
+              "type": "quantitative", 
+              "ticks": 8
+            },
+            "y": {
+              "field": "precipitation"
+            },
+            "tooltip": {"field": "precipitation", "type": "quantitative"}
+          }
+        },
+      ]
+    } 
+
+    vegaEmbed("#vis", yourVlSpec);
+  </script>
+</body>
+</html>
