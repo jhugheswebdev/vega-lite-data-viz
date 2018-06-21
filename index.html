@@ -19,7 +19,7 @@
       "data": {"url": "https://vega.github.io/vega-lite/data/seattle-weather.csv"},
       "vconcat": [
       {
-          "width": 480,
+          "width": 1000,
           "height": 300,
           "mark": "bar",
           "encoding": {
@@ -42,7 +42,7 @@
           }
         },
         { 
-          "width": 480,
+          "width": 1000,
           "mark": "point",
           "encoding": {
             "x": {
@@ -58,7 +58,7 @@
             "tooltip": {"field": "wind", "type": "quantitative"}
           }
         },{
-          "width": 480,
+          "width": 1000,
           "height": 60,
           "mark": "point",
           "selection" : {
@@ -79,13 +79,13 @@
         },
         
         {
-          "width": 480,
+          "width": 1000,
           "mark": "bar",
           "encoding": {
             "x": {
-              "timeUnit": "yearquartermonth", 
+              "timeUnit": "yearmonth", 
               "field": "date", 
-              "type": "quantitative", 
+              "type": "ordinal", 
               "ticks": 8
             },
             "y": {
